@@ -1,0 +1,3 @@
+add_executable(SP26_Shinji_Kusakabe Game.cpp)
+
+target_link_libraries(SP26_Shinji_Kusakabe Hat)
