@@ -1,4 +1,4 @@
 #pragma once
 
 #include"../HatApplication.h"
-#include"../Include/EntryPoint.h"
+#include"../EntryPoint.h"

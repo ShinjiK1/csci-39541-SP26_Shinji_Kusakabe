@@ -1,5 +1,7 @@
 #pragma once
 
+#include"pch.h"
+
 #ifdef HAT_MSVC
 	#ifdef HAT_LIB
 		#define HAT_API __declspec(dllexport)
