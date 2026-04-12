@@ -6,7 +6,7 @@ class Game : public Hat::HatApplication
 {
 	virtual void Update() override
 	{
-		HAT_LOG("Running nicely!");
+		//HAT_LOG("Running nicely!");
 	}
 };
 

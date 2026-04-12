@@ -20,6 +20,9 @@ namespace Hat
 			return;
 		}
 		glfwMakeContextCurrent(mWindowPtr);
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+			HAT_ERROR("Could not initialize GLAD");
+		}
 	}
 
 	Dimensions WindowGLFW::GetSize() const
