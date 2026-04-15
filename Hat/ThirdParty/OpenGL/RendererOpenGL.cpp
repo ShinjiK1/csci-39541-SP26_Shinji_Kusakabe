@@ -3,14 +3,22 @@
 #include"RendererOpenGL.h"
 #include"glad/glad.h"
 
+#include"Window.h"
+
 namespace Hat
 {
-	void RendererOpenGL::Draw(const Picture& pic, int xCoord, int yCoord)
+	RendererOpenGL::RendererOpenGL()
+	{
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+	}
+
+	void RendererOpenGL::Draw(Picture& pic, int xCoord, int yCoord, Shader& shader)
 	{
 		float data[] = {
 			xCoord, yCoord, 0.0f, 0.0f,	//Bottom Left
 			xCoord, yCoord + pic.GetDimensions().height, 0.0f, 1.0f,	//Top Left
-			xCoord + pic.GetDimensions().width, yCoord + pic.GetDimensions().height,	1.0f, 1.0f,	//Top Right
+			xCoord + pic.GetDimensions().width, yCoord + pic.GetDimensions().height, 1.0f, 1.0f,	//Top Right
 			xCoord + pic.GetDimensions().width, yCoord, 1.0f, 0.0f,	//Bottom Right
 		};
 
@@ -38,10 +46,23 @@ namespace Hat
 		glGenBuffers(1, &EBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+
+		pic.Bind();
+		shader.Bind();
+		shader.SupplyIntUniform("screenRes", { Window::Get()->GetSize().width,Window::Get()->GetSize().height });
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+
+		glDeleteBuffers(1, &VAO);
+		glDeleteBuffers(1, &VBO);
+		glDeleteBuffers(1, &EBO);
 	}
 
-	void RendererOpenGL::Draw(const Picture& pic, int xCoord, int yCoord, const Shader& shader)
+	void RendererOpenGL::ScreenClear()
 	{
-
+		glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 	}
 }

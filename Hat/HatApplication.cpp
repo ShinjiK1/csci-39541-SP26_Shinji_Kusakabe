@@ -8,6 +8,7 @@
 
 #include"Picture.h"
 #include"Shader.h"
+#include"Renderer.h"
 
 namespace Hat
 {
@@ -31,11 +32,14 @@ namespace Hat
 		Window::Init();
 		Window::Get()->Create({600,400}, "FallGame");
 
+		Renderer::Init();
+
 		Initialize();
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
 
+		/*
 		float data[] = {
 			0.0f, 0.0f, 0.0f, 0.0f,	//Bottom Left
 			0.0f, 100.0f, 0.0f, 1.0f,	//Top Left
@@ -67,6 +71,8 @@ namespace Hat
 		glGenBuffers(1, &EBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+		*/
 
 		// Shaders
 
@@ -175,19 +181,19 @@ namespace Hat
 		*/
 
 		Picture pic{ "../Hat/Assets/Images/Character.png" };
-		Shader shader{"../Hat/Assets/Shaders/defaultVertexShader.glsl", "../Hat/Assets/Shaders/defaultFragShader.glsl"};
+		//Shader shader{"../Hat/Assets/Shaders/defaultVertexShader.glsl", "../Hat/Assets/Shaders/defaultFragShader.glsl"};
 
 
 		while (true) {
-			
-			glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			Renderer::Get()->ScreenClear();
 
 			Update();
 
 			//glUseProgram(shaderProgram);
-			glBindVertexArray(VAO);
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			//glBindVertexArray(VAO);
+			//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+			Renderer::Get()->Draw(pic, 200, 200);
 
 			Window::Get()->SwapBuffers();
 			Window::Get()->PollEvents();

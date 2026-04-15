@@ -19,5 +19,7 @@ namespace Hat
 	private:
 		std::unique_ptr<PictureImplementation> mImplementation;
 		void Bind();
+
+		friend class RendererOpenGL;
 	};
 }

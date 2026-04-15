@@ -7,10 +7,12 @@ namespace Hat
 	class RendererOpenGL : public RendererImplementation
 	{
 	public:
-		virtual void Draw(const Picture& pic, int xCoord, int yCoord) override;
-		virtual void Draw(const Picture& pic, int xCoord, int yCoord, const Shader& shader) override;
+		RendererOpenGL();
+
+		virtual void Draw(Picture& pic, int xCoord, int yCoord, Shader& shader) override;
+		virtual void ScreenClear() override;
 
 	private:
-
+		Shader mDefaultShaders;
 	};
 }

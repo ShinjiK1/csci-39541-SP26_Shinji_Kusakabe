@@ -15,8 +15,10 @@ namespace Hat
 		static void Init();
 		static std::unique_ptr<Renderer>& Get();
 
-		void Draw(const Picture& pic, int xCoord, int yCoord);
-		void Draw(const Picture& pic, int xCoord, int yCoord, const Shader& shader);
+		void Draw(Picture& pic, int xCoord, int yCoord);
+		void Draw(Picture& pic, int xCoord, int yCoord, Shader& shader);
+
+		void ScreenClear();
 
 	private:
 		std::unique_ptr<RendererImplementation> mImplementation;

@@ -8,8 +8,8 @@ namespace Hat
 	class RendererImplementation
 	{
 	public:
-		virtual void Draw(const Picture& pic, int xCoord, int yCoord) = 0;
-		virtual void Draw(const Picture& pic, int xCoord, int yCoord, const Shader& shader) = 0;
+		virtual void Draw(Picture& pic, int xCoord, int yCoord, Shader& shader) = 0;
+		virtual void ScreenClear() = 0;
 
 		virtual ~RendererImplementation() {};
 	};
