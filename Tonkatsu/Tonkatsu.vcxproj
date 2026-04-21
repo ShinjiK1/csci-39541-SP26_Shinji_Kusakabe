@@ -21,9 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2482f62e-45b1-4041-baca-70fa6d4bf097}</ProjectGuid>
-    <RootNamespace>SP26ShinjiKusakabe</RootNamespace>
+    <ProjectGuid>{e8d608ce-7e2d-480d-bb9b-5b2fbceadcef}</ProjectGuid>
+    <RootNamespace>Tonkatsu</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Tonkatsu</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -40,13 +41,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -114,10 +115,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;TONKATSU_DEBUG=2;%(PreprocessorDefinitions);TONKATSU_MSVC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);TONKATSU_LIB;TONKATSU_MSVC;TONKATSU_DEBUG=2;TONKATSU_GLFW;TONKATSU_OPENGL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Tonkatsu\Include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)glfw\include;$(SolutionDir)glad\include;$(SolutionDir)stbi;$(SolutionDir)Tonkatsu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,10 +133,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);TONKATSU_MSVC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);TONKATSU_LIB;TONKATSU_MSVC;TONKATSU_GLFW;TONKATSU_OPENGL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Tonkatsu\Include</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)glfw\include;$(SolutionDir)glad\include;$(SolutionDir)stbi;$(SolutionDir)Tonkatsu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,14 +148,52 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
+    <ClInclude Include="EntryPoint.h" />
+    <ClInclude Include="TonkatsuApplication.h" />
+    <ClInclude Include="TonkatsuTypes.h" />
+    <ClInclude Include="TonkatsuUtility.h" />
+    <ClInclude Include="Include\Tonkatsu.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Picture.h" />
+    <ClInclude Include="PictureImplementation.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RendererImplementation.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderImplementation.h" />
+    <ClInclude Include="ThirdParty\GLFW\WindowGLFW.h" />
+    <ClInclude Include="ThirdParty\OpenGL\PictureOpenGL.h" />
+    <ClInclude Include="ThirdParty\OpenGL\RendererOpenGL.h" />
+    <ClInclude Include="ThirdParty\OpenGL\ShaderOpenGL.h" />
+    <ClInclude Include="Window.h" />
+    <ClInclude Include="WindowImplementation.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TonkatsuApplication.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Picture.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ThirdParty\GLFW\WindowGLFW.cpp" />
+    <ClCompile Include="ThirdParty\OpenGL\PictureOpenGL.cpp" />
+    <ClCompile Include="ThirdParty\OpenGL\RendererOpenGL.cpp" />
+    <ClCompile Include="ThirdParty\OpenGL\ShaderOpenGL.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tonkatsu\Tonkatsu.vcxproj">
-      <Project>{e8d608ce-7e2d-480d-bb9b-5b2fbceadcef}</Project>
+    <ProjectReference Include="..\glad\glad.vcxproj">
+      <Project>{eeff4cc6-8c9a-4c61-9749-8917c1788b10}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\glfw_proj\src\glfw.vcxproj">
+      <Project>{ed0555e6-59ab-33d6-80d4-28a5abf604ce}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\stbi\stbi.vcxproj">
+      <Project>{70b89ff7-b872-4a8a-adf3-4e9c442bcace}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

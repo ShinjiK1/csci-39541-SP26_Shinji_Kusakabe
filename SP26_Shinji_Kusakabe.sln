@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hat", "Hat\Hat.vcxproj", "{E8D608CE-7E2D-480D-BB9B-5B2FBCEADCEF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tonkatsu", "Tonkatsu\Tonkatsu.vcxproj", "{E8D608CE-7E2D-480D-BB9B-5B2FBCEADCEF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SP26_Shinji_Kusakabe", "SP26_Shinji_Kusakabe\SP26_Shinji_Kusakabe.vcxproj", "{2482F62E-45B1-4041-BACA-70FA6D4BF097}"
 EndProject

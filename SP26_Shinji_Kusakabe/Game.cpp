@@ -1,8 +1,8 @@
-#include"Hat.h"
+#include"Tonkatsu.h"
 
 #include<iostream>
 
-class Game : public Hat::HatApplication
+class Game : public Tonkatsu::TonkatsuApplication
 {
 	virtual void Update() override
 	{
@@ -10,4 +10,4 @@ class Game : public Hat::HatApplication
 	}
 };
 
-START_HAT_GAME(Game);
+START_TONKATSU_GAME(Game);
