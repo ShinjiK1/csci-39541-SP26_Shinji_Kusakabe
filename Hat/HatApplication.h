@@ -2,6 +2,8 @@
 
 #include"HatUtility.h"
 
+constexpr int FPS{ 60 };
+
 namespace Hat
 {
 	class HAT_API HatApplication
@@ -15,6 +17,7 @@ namespace Hat
 		virtual ~HatApplication();
 
 	private:
-
+		std::chrono::milliseconds mFrameDuration{ 1000 / FPS };
+		std::chrono::steady_clock::time_point mNextFrameTime;
 	};
 }
