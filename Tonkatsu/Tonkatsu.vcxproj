@@ -149,7 +149,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="EntryPoint.h" />
+    <ClInclude Include="KeyCodes.h" />
     <ClInclude Include="TonkatsuApplication.h" />
+    <ClInclude Include="TonkatsuEvents.h" />
     <ClInclude Include="TonkatsuTypes.h" />
     <ClInclude Include="TonkatsuUtility.h" />
     <ClInclude Include="Include\Tonkatsu.h" />
@@ -164,6 +166,7 @@
     <ClInclude Include="ThirdParty\OpenGL\PictureOpenGL.h" />
     <ClInclude Include="ThirdParty\OpenGL\RendererOpenGL.h" />
     <ClInclude Include="ThirdParty\OpenGL\ShaderOpenGL.h" />
+    <ClInclude Include="Unit.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowImplementation.h" />
   </ItemGroup>
@@ -180,6 +183,8 @@
     <ClCompile Include="ThirdParty\OpenGL\PictureOpenGL.cpp" />
     <ClCompile Include="ThirdParty\OpenGL\RendererOpenGL.cpp" />
     <ClCompile Include="ThirdParty\OpenGL\ShaderOpenGL.cpp" />
+    <ClCompile Include="TonkatsuEvents.cpp" />
+    <ClCompile Include="Unit.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>

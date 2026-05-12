@@ -7,3 +7,4 @@
 #include<algorithm>
 #include<iostream>
 #include<fstream>
+#include<functional>

@@ -17,7 +17,15 @@ namespace Tonkatsu
 
 		virtual void SwapBuffers() override;
 		virtual void PollEvents() override;
+
+		virtual void SetKeyCallback(std::function<void(const KeyEvent&)> newCallback) override;
+		virtual void SetWindowCloseCallback(std::function<void(const WindowCloseEvent&)> newCallback) override;
 	private:
 		GLFWwindow* mWindowPtr{ nullptr };
+
+		struct Callbacks {
+			std::function<void(const KeyEvent&)> KeyCallback;
+			std::function<void(const WindowCloseEvent&)> WindowCloseCallback;
+		} mCallback;
 	};
 }

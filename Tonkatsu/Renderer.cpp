@@ -26,6 +26,16 @@ namespace Tonkatsu
 		mImplementation->Draw(pic, xCoord, yCoord, shader);
 	}
 
+	void Renderer::Draw(Unit& unit)
+	{
+		mImplementation->Draw(unit.mPicture, unit.mXPos, unit.mYPos, mDefaultShaders);
+	}
+
+	void Renderer::Draw(Unit& unit, Shader& shader)
+	{
+		mImplementation->Draw(unit.mPicture, unit.mXPos, unit.mYPos, shader);
+	}
+
 	void Renderer::ScreenClear()
 	{
 		mImplementation->ScreenClear();

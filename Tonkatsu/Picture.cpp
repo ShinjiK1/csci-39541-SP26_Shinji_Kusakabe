@@ -23,6 +23,17 @@ namespace Tonkatsu
 #endif
 	}
 
+	Picture::Picture(Picture&& other)
+	{
+		mImplementation = std::move(other.mImplementation);
+	}
+
+	Picture& Picture::operator=(Picture&& other)
+	{
+		mImplementation = std::move(other.mImplementation);
+		return *this;
+	}
+
 	void Picture::LoadImage(const std::string& fileName)
 	{
 		mImplementation->LoadImage(fileName);

@@ -23,6 +23,17 @@ namespace Tonkatsu
 #endif
 	}
 
+	Shader::Shader(Shader&& other)
+	{
+		mImplementation = std::move(other.mImplementation);
+	}
+
+	Shader& Shader::operator=(Shader&& other)
+	{
+		mImplementation = std::move(other.mImplementation);
+		return *this;
+	}
+
 	void Shader::LoadShader(const std::string& vertexFileName, const std::string& fragmentFileName)
 	{
 		mImplementation->LoadShader(vertexFileName, fragmentFileName);

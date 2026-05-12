@@ -6,6 +6,7 @@
 #include"Picture.h"
 #include"RendererImplementation.h"
 #include"ThirdParty/OpenGL/RendererOpenGL.h"
+#include"Unit.h"
 
 namespace Tonkatsu
 {
@@ -17,6 +18,8 @@ namespace Tonkatsu
 
 		void Draw(Picture& pic, int xCoord, int yCoord);
 		void Draw(Picture& pic, int xCoord, int yCoord, Shader& shader);
+		void Draw(Unit& unit);
+		void Draw(Unit& unit, Shader& shader);
 
 		void ScreenClear();
 

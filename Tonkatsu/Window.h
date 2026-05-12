@@ -4,6 +4,7 @@
 #include"WindowImplementation.h"
 #include"TonkatsuUtility.h"
 #include"TonkatsuTypes.h"
+#include"TonkatsuEvents.h"
 
 namespace Tonkatsu
 {
@@ -19,6 +20,9 @@ namespace Tonkatsu
 
 		void SwapBuffers();
 		void PollEvents();
+
+		void SetKeyCallback(std::function<void(const KeyEvent&)> newCallback);
+		void SetWindowCloseCallback(std::function<void(const WindowCloseEvent&)> newCallback);
 
 	private:
 		Window();

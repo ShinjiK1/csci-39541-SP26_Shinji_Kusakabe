@@ -13,6 +13,13 @@ namespace Tonkatsu
 	public:
 		Picture();
 		Picture(const std::string& fileName);
+
+		Picture(const Picture&) = delete;
+		Picture& operator=(const Picture&) = delete;
+
+		Picture(Picture&& other);
+		Picture& operator=(Picture&& other);
+
 		void LoadImage(const std::string& fileName);
 		Dimensions GetDimensions() const;
 
