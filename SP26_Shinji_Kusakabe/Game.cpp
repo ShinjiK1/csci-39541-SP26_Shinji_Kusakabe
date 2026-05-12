@@ -26,8 +26,8 @@ class Game : public Tonkatsu::TonkatsuApplication
 		Tonkatsu::Renderer::Get()->Draw(unit2);
 	}
 private:
-	Tonkatsu::Unit unit{ "../Tonkatsu/Assets/Images/Character.png", 10, 10 };
-	Tonkatsu::Unit unit2{ "../Tonkatsu/Assets/Images/Character.png", 300, 10 };
+	Tonkatsu::Unit unit{ "Assets/Images/Character.png", 10, 10 };
+	Tonkatsu::Unit unit2{ "Assets/Images/Character.png", 300, 10 };
 };
 
 START_TONKATSU_GAME(Game);
