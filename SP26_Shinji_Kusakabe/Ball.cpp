@@ -7,21 +7,30 @@
 std::random_device rd;
 std::mt19937 gen(rd());
 
-std::uniform_int_distribution<> xSpeeds(20, 30); //Possible xSpeeds. 
+std::uniform_int_distribution<> xSpeeds(12, 18); //Possible xSpeeds. 
+std::uniform_int_distribution<> ySpeeds(25, 35); //Possible ySpeeds. 
 std::uniform_int_distribution<> fiftyFifty(0, 1); //For random gen
 
-Ball::Ball(): sprite("Assets/Images/Ballsprite.png",480,380)
+Ball::Ball(): sprite("Assets/Images/Ballsprite.png",480,380), lastCollidedId(-1), ySpeed(0), xSpeed(0)
 {
-	if (fiftyFifty(gen) == 0) {
-		ySpeed = 25;
-	}
-	else {
-		ySpeed = -25;
-	}
-	xSpeed = xSpeeds(gen);
+	InitializeMove();
 }
 
-void Ball::HandleMove()
+void Ball::InitializeMove()
+{
+	ySpeed = ySpeeds(gen);
+	if (fiftyFifty(gen) == 1) {
+		ySpeed *= -1;
+	}
+
+	xSpeed = xSpeeds(gen);
+	if (fiftyFifty(gen) == 1) {
+		TONKATSU_LOG("BALL SHOULD BE GOING LEFT");
+		xSpeed *= -1;
+	}
+}
+
+int Ball::HandleMove()
 {
 	sprite.IncrementXPosition(xSpeed);
 	sprite.IncrementYPosition(ySpeed);
@@ -41,16 +50,30 @@ void Ball::HandleMove()
 	if (sprite.GetYCoordinate() >= screenY - sprite.GetDimensions().height && ySpeed > 0) {
 		ySpeed *= -1;
 	}
+
+	if (sprite.GetXCoordinate() <= -1 * sprite.GetDimensions().width) {
+		return 1;
+	}
+	else if (sprite.GetXCoordinate() >= screenX) {
+		return 2;
+	}
+	return 0;
 }
 
-void Ball::OnCollideWall()
+void Ball::CheckCollision(const Paddle& paddle)
 {
+	if (paddle.GetId() == lastCollidedId) {
+		return;
+	}
+	if (Collide(sprite, paddle.sprite)) {
+		int xSpeedSign = (xSpeed > 0) ? 1 : -1;
+		xSpeed = xSpeeds(gen) * xSpeedSign * -1; //Times -1 because we want to horizontally flip/bounce the ball back when it hits a paddle
 
-}
+		int ySpeedSign = (ySpeed > 0) ? 1 : -1;
+		ySpeed = ySpeeds(gen) * ySpeedSign; //No times -1 because we don't want to vertically change the ball's speed here.
 
-void Ball::OnCollidePaddle(const Paddle& paddle)
-{
-
+		lastCollidedId = paddle.GetId();
+	}
 }
 
 int Ball::GetXSpeed() const

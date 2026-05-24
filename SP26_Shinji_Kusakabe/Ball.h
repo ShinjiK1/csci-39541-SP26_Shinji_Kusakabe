@@ -7,9 +7,9 @@ class Paddle;
 class Ball {
 public:
 	Ball();
-	void HandleMove();
-	void OnCollideWall();
-	void OnCollidePaddle(const Paddle& paddle);
+	void InitializeMove();
+	int HandleMove();
+	void CheckCollision(const Paddle& paddle);
 	int GetXSpeed() const;
 	int GetYSpeed() const;
 
@@ -18,4 +18,5 @@ public:
 private:
 	int xSpeed;
 	int ySpeed;
+	int lastCollidedId;
 };

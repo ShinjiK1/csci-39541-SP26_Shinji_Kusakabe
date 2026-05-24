@@ -10,6 +10,7 @@ public:
 	void MoveUp(int amount);
 	void MoveDown(int amount);
 	void HandleCPU(const Ball& target);
+	int GetId() const;
 
 
 	Tonkatsu::Unit sprite;

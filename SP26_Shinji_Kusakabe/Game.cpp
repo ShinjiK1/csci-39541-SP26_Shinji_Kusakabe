@@ -14,6 +14,10 @@ class Game : public Tonkatsu::TonkatsuApplication
 			else if (event.GetKeyCode() == Tonkatsu::Key::DOWN && (event.GetAction() == Tonkatsu::KeyAction::REPEAT || event.GetAction() == Tonkatsu::KeyAction::PRESS)) {
 				p1.MoveDown(15);
 			}
+			else if (event.GetKeyCode() == Tonkatsu::Key::SPACE && event.GetAction() == Tonkatsu::KeyAction::PRESS && !inProgress) {
+				inProgress = true;
+				ball.InitializeMove();
+			}
 		});
 	}
 
@@ -24,8 +28,24 @@ class Game : public Tonkatsu::TonkatsuApplication
 			TONKATSU_LOG("Collision!");
 		}
 		*/
-
-		ball.HandleMove();
+		if (inProgress) {
+			p2.HandleCPU(ball);
+			switch(ball.HandleMove()) {
+				case 0:
+					TONKATSU_LOG("Ongoing");
+					break;
+				case 1:
+					TONKATSU_LOG("YOU LOSE");
+					inProgress = false;
+					break;
+				case 2:
+					TONKATSU_LOG("YOU WIN");
+					inProgress = false;
+					break;
+			}
+			ball.CheckCollision(p1);
+			ball.CheckCollision(p2);
+		}
 
 		Tonkatsu::Renderer::Get()->Draw(p1.sprite);
 		Tonkatsu::Renderer::Get()->Draw(p2.sprite);
@@ -35,6 +55,7 @@ private:
 	Paddle p1{ false };
 	Paddle p2{ true };
 	Ball ball;
+	bool inProgress{ false };
 };
 
 START_TONKATSU_GAME(Game);
