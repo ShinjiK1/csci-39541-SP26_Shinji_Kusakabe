@@ -31,12 +31,12 @@ set(SOURCE_FILES
 	Unit.cpp
 )
 
-add_library(Tonkatsu SHARED ${Source_Files})
+add_library(Tonkatsu SHARED ${SOURCE_FILES})
 
 target_precompile_headers(Tonkatsu PRIVATE pch.h)
 
 if(MSVC)
-	target_compile_definitions(Tonkatsu PUBlIC TONKATSU_MSVC)
+	target_compile_definitions(Tonkatsu PUBLIC TONKATSU_MSVC)
 endif()
 
 target_compile_definitions(Tonkatsu
@@ -56,4 +56,4 @@ target_include_directories(Tonkatsu PRIVATE ../stbi)
 
 target_link_libraries(Tonkatsu glfw glad stbi)
 
-file(COPY Assets Destination ${CMAKE_BINARY_DIR}/Tonkatsu)
+file(COPY Assets DESTINATION ${CMAKE_BINARY_DIR}/Tonkatsu)
