@@ -17,7 +17,7 @@ namespace Tonkatsu
 {
 	TonkatsuApplication::TonkatsuApplication() {
 		Window::Init();
-		Window::Get()->Create({1000,800}, "FallGame");
+		Window::Get()->Create({1000,800}, "SpringGame");
 
 		SetWindowCloseCallback([this](const WindowCloseEvent& event) {DefaultWindowCloseCallback(event); });
 

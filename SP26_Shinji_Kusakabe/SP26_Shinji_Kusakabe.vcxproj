@@ -143,7 +143,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="Paddle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
@@ -152,6 +155,11 @@
     <ProjectReference Include="..\Tonkatsu\Tonkatsu.vcxproj">
       <Project>{e8d608ce-7e2d-480d-bb9b-5b2fbceadcef}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Ball.h" />
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="Paddle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

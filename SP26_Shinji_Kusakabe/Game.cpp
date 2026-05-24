@@ -1,4 +1,6 @@
 #include"Tonkatsu.h"
+#include"Paddle.h"
+#include"Ball.h"
 
 #include<iostream>
 
@@ -6,28 +8,33 @@ class Game : public Tonkatsu::TonkatsuApplication
 {
 	void Initialize() override {
 		SetKeyCallback([this](const Tonkatsu::KeyEvent& event) {
-			if (event.GetKeyCode() == Tonkatsu::Key::RIGHT && event.GetAction() == Tonkatsu::KeyAction::PRESS) {
-				unit.IncrementXPosition(5);
+			if (event.GetKeyCode() == Tonkatsu::Key::UP && (event.GetAction() == Tonkatsu::KeyAction::REPEAT || event.GetAction() == Tonkatsu::KeyAction::PRESS)) {
+				p1.MoveUp(15);
 			}
-			else if (event.GetKeyCode() == Tonkatsu::Key::LEFT && event.GetAction() == Tonkatsu::KeyAction::PRESS) {
-				unit.IncrementXPosition(-5);
+			else if (event.GetKeyCode() == Tonkatsu::Key::DOWN && (event.GetAction() == Tonkatsu::KeyAction::REPEAT || event.GetAction() == Tonkatsu::KeyAction::PRESS)) {
+				p1.MoveDown(15);
 			}
 		});
 	}
 
 	virtual void Update() override
 	{
-		//HAT_LOG("Running nicely!");
+		/*
 		if (Collide(unit, unit2)) {
 			TONKATSU_LOG("Collision!");
 		}
+		*/
 
-		Tonkatsu::Renderer::Get()->Draw(unit);
-		Tonkatsu::Renderer::Get()->Draw(unit2);
+		ball.HandleMove();
+
+		Tonkatsu::Renderer::Get()->Draw(p1.sprite);
+		Tonkatsu::Renderer::Get()->Draw(p2.sprite);
+		Tonkatsu::Renderer::Get()->Draw(ball.sprite);
 	}
 private:
-	Tonkatsu::Unit unit{ "Assets/Images/Character.png", 10, 10 };
-	Tonkatsu::Unit unit2{ "Assets/Images/Character.png", 300, 10 };
+	Paddle p1{ false };
+	Paddle p2{ true };
+	Ball ball;
 };
 
 START_TONKATSU_GAME(Game);
