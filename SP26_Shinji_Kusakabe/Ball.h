@@ -8,6 +8,7 @@ class Ball {
 public:
 	Ball();
 	void InitializeMove();
+	void Reset();
 	int HandleMove();
 	void CheckCollision(const Paddle& paddle);
 	int GetXSpeed() const;

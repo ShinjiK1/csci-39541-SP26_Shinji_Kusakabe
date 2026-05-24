@@ -23,6 +23,7 @@ namespace Tonkatsu
 
 		int nrChannels;
 		stbi_set_flip_vertically_on_load(true);
+		TONKATSU_LOG("CONSTRUCTOR FOR IMAGE: " << fileName.c_str());
 		unsigned char* pdata = stbi_load(
 			fileName.c_str(),
 			&mDimensions.width, &mDimensions.height,
@@ -34,7 +35,8 @@ namespace Tonkatsu
 		}
 		else
 		{
-			TONKATSU_ERROR("Failed to load texture" << std::endl);
+			TONKATSU_ERROR("Failed to load texture");
+			TONKATSU_ERROR(stbi_failure_reason());
 		}
 		stbi_image_free(pdata);
 	}

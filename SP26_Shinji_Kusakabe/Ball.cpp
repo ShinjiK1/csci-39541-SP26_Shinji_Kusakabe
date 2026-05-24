@@ -11,7 +11,7 @@ std::uniform_int_distribution<> xSpeeds(12, 18); //Possible xSpeeds.
 std::uniform_int_distribution<> ySpeeds(25, 35); //Possible ySpeeds. 
 std::uniform_int_distribution<> fiftyFifty(0, 1); //For random gen
 
-Ball::Ball(): sprite("Assets/Images/Ballsprite.png",480,380), lastCollidedId(-1), ySpeed(0), xSpeed(0)
+Ball::Ball(): sprite("Assets/Images/BallSprite.png",480,380), lastCollidedId(-1), ySpeed(0), xSpeed(0)
 {
 	InitializeMove();
 }
@@ -28,6 +28,12 @@ void Ball::InitializeMove()
 		TONKATSU_LOG("BALL SHOULD BE GOING LEFT");
 		xSpeed *= -1;
 	}
+}
+
+void Ball::Reset()
+{
+	sprite.SetCoordinates(480, 380);
+	lastCollidedId = -1;
 }
 
 int Ball::HandleMove()

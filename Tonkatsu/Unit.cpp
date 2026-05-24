@@ -4,12 +4,12 @@
 namespace Tonkatsu {
 	Unit::Unit(const std::string& fileName): mPicture(fileName)
 	{
-
+		TONKATSU_LOG("CONSTRUCTING UNIT FOR " << fileName);
 	}
 
 	Unit::Unit(const std::string& fileName, int xPos, int yPos): mPicture(fileName), mXPos(xPos), mYPos(yPos)
 	{
-
+		TONKATSU_LOG("CONSTRUCTING UNIT FOR " << fileName);
 	}
 
 	void Unit::SetCoordinates(int newXPos, int newYPos)

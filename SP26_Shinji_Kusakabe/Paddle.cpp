@@ -15,6 +15,16 @@ Paddle::Paddle(bool isCpu): isCPU(isCpu), sprite("Assets/Images/PaddleSprite.png
 	}
 }
 
+void Paddle::Reset()
+{
+	if (!isCPU) {
+		sprite.SetCoordinates(110, 260);
+	}
+	else {
+		sprite.SetCoordinates(screenX - 110 - sprite.GetDimensions().width, 260);
+	}
+}
+
 void Paddle::MoveUp(int amount)
 {
 	if (sprite.GetYCoordinate() + amount > screenY - sprite.GetDimensions().height) {
